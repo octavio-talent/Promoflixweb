@@ -1,0 +1,354 @@
+/* Fade in animations */
+.fade-in-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-element.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Interactive elements */
+.interactive-element {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.interactive-element::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(33, 204, 238, 0.1) 0%, rgba(105, 39, 218, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.interactive-element:hover::before {
+  opacity: 1;
+}
+
+.interactive-element:hover {
+  transform: translateY(-2px);
+}
+
+.interactive-element:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Parallax images */
+.parallax-image {
+  transition: transform 0.3s ease;
+}
+
+.parallax-image:hover {
+  transform: scale(1.05);
+}
+
+/* Button animations */
+button, a[data-name*="Link"], [data-name*="Button"] {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after, 
+a[data-name*="Link"]::after, 
+[data-name*="Button"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:hover::after,
+a[data-name*="Link"]:hover::after,
+[data-name*="Button"]:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Gradient animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+[style*="gradient"] {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Glow effect */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(33, 204, 238, 0.5),
+                0 0 10px rgba(33, 204, 238, 0.3),
+                0 0 15px rgba(33, 204, 238, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(105, 39, 218, 0.5),
+                0 0 20px rgba(105, 39, 218, 0.3),
+                0 0 30px rgba(105, 39, 218, 0.2);
+  }
+}
+
+/* Apply glow to specific elements */
+[data-name*="framer-Vioww"],
+[style*="linear-gradient(90deg, rgb(33, 204, 238)"] {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Shimmer effect for images */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+img {
+  position: relative;
+  overflow: hidden;
+}
+
+img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* Pulse animation for important elements */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+[data-name*="framer-efueth"],
+[data-name*="framer-zbpyt7"] {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Custom cursor trail effect */
+@keyframes cursor-trail {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Apply floating to certain elements */
+[data-name*="Image"]:not([data-name*="ImageWithFallback"]) {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Rotate animation for icons */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+svg:hover {
+  animation: rotate 0.6s ease;
+}
+
+/* Slide in from sides */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Apply slide animations alternately */
+section:nth-child(odd) {
+  animation: slide-in-left 1s ease-out;
+}
+
+section:nth-child(even) {
+  animation: slide-in-right 1s ease-out;
+}
+
+/* Enhanced shadow on hover */
+.interactive-element:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Text gradient animation */
+@keyframes text-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+h1, h2, h3 {
+  background: linear-gradient(
+    90deg,
+    #21CCEE 0%,
+    #1470EF 33%,
+    #6927DA 66%,
+    #F23D94 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: text-gradient 5s linear infinite;
+}
+
+/* Smooth scroll snap */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading animation for images */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+img:not([src]) {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 0px,
+    #e0e0e0 40px,
+    #f0f0f0 80px
+  );
+  background-size: 200px;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* Stagger children animation */
+.stagger-children > * {
+  animation: fade-in 0.6s ease-out backwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Magnetic button effect */
+.interactive-element {
+  transform-style: preserve-3d;
+}
+
+/* Progress bar */
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Reveal animation */
+@keyframes reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Background blur on scroll */
+.blur-on-scroll {
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.3s ease;
+}
+
+.blur-on-scroll.scrolled {
+  backdrop-filter: blur(10px);
+}
