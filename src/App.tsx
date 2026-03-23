@@ -1,6 +1,6 @@
-import { InteractiveBody } from './components/InteractiveBody';
+import { PromoFlixLanding } from './components/PromoFlixLanding';
 import './styles/interactive.css';
 
 export default function App() {
-  return <InteractiveBody />;
+  return <PromoFlixLanding />;
 }

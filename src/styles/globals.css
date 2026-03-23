@@ -183,3 +183,158 @@
 html {
   font-size: var(--font-size);
 }
+
+/* Interactive Animations */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(74, 158, 255, 0.5);
+  }
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  animation: ripple 0.6s ease-out;
+}
+
+.click-particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation: particle-burst 1s ease-out forwards;
+}
+
+/* Hover Effects */
+button:not(.no-hover),
+[role="button"]:not(.no-hover),
+a:not(.no-hover) {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+button:hover:not(.no-hover),
+[role="button"]:hover:not(.no-hover),
+a:hover:not(.no-hover) {
+  transform: translateY(-2px);
+}
+
+button:active:not(.no-hover),
+[role="button"]:active:not(.no-hover),
+a:active:not(.no-hover) {
+  transform: translateY(0px);
+}
+
+/* Card Hover Effects */
+[data-name*="Card"] {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-name*="Card"]:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Tilt Effect */
+img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+img:hover {
+  transform: scale(1.05) rotate(1deg);
+}
+
+/* Smooth Transitions for All Interactive Elements */
+* {
+  transition-property: transform, box-shadow, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Floating Animation for Badges */
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Glow for Important Elements */
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Magnetic Effect */
+@keyframes magnetic-pull {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(var(--mouse-x, 0), var(--mouse-y, 0));
+  }
+}
+
+.magnetic {
+  transition: transform 0.2s ease-out;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Colors */
+::selection {
+  background: rgba(255, 193, 7, 0.3);
+  color: #000;
+}
+
+::-moz-selection {
+  background: rgba(255, 193, 7, 0.3);
+  color: #000;
+}
+
+/* Hide Scrollbar */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -9,6 +9,45 @@ export function InteractiveBody() {
   const { scrollY } = useScroll();
   
   useEffect(() => {
+    // Replace Salix content with PromoFlix content
+    const replaceContent = () => {
+      // Replace brand name and content with PromoFlix
+      const walkTextNodes = (node: Node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (node.textContent) {
+            // Replace Salix with PromoFlix
+            node.textContent = node.textContent.replace(/Salix/gi, 'PromoFlix');
+            
+            // Replace specific phrases
+            node.textContent = node.textContent
+              .replace(/14 Days Free Trial/gi, 'TRY FOR FREE')
+              .replace(/Get 14 Days Free Trial/gi, 'TRY FOR FREE')
+              .replace(/Try PromoFlix Free for 14 Days/gi, 'Try PromoFlix - Start Free Today')
+              .replace(/Is my data safe on PromoFlix\?/gi, 'How does PromoFlix work?')
+              .replace(/cut our admin work by more than half/gi, 'helped us 4x our response rates with personalized video')
+              .replace(/isn't just software—it feels like an/gi, 'makes every prospect feel like our only prospect. Game changer')
+              .replace(/revolutionize/gi, 'transform')
+              .replace(/complexity of sales management/gi, 'challenge of scaling personal outreach')
+              .replace(/streamline every step of the process/gi, 'personalize videos at scale with AI')
+              .replace(/© 2025 PromoFlix, Inc\. All rights reserved\./gi, '© 2025 PromoFlix, Inc. All rights reserved.')
+              .replace(/Sales Automation/gi, 'Video Personalization')
+              .replace(/Deal Tracking/gi, 'AI Voice Cloning')
+              .replace(/CRM Integration/gi, 'Dynamic Variables')
+              .replace(/AI that moves sales/gi, 'AI that personalizes')
+              .replace(/forward & faster/gi, 'at massive scale')
+              .replace(/Automate repetitive tasks like follow-ups, reminders, and data/gi, 'Record one video and let AI personalize it for every')
+              .replace(/entry to save time and increase efficiency\./gi, 'prospect with custom names, offers, and messages.')
+              .replace(/Core Features/gi, 'Key Features')
+              .replace(/Key Tools/gi, 'Core Tools');
+          }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          node.childNodes.forEach(walkTextNodes);
+        }
+      };
+
+      walkTextNodes(document.body);
+    };
+
     // Custom cursor tracking
     const handleMouseMove = (e: MouseEvent) => {
       const cursor = document.getElementById('cursor-trail');
@@ -67,7 +106,9 @@ export function InteractiveBody() {
               btnText.includes('free') ||
               btnText.includes('trial') ||
               btnText.includes('Get') ||
-              btnText.includes('Start')
+              btnText.includes('Start') ||
+              btnText.includes('TRY') ||
+              btnText.includes('FREE')
             )) {
               e.preventDefault();
               e.stopPropagation();
@@ -94,6 +135,31 @@ export function InteractiveBody() {
         if (scrollProgress > 0 && scrollProgress < 1) {
           const parallaxAmount = scrollProgress * 20 - 10;
           img.style.transform = `translateY(${parallaxAmount}px)`;
+        }
+      });
+
+      // Zoom-in animation for "What's inside" cards
+      const cards = document.querySelectorAll('[data-name*="trigger-01"], [data-name*="trigger-02"], [data-name*="trigger-03"]');
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const cardCenter = rect.top + rect.height / 2;
+        const scrollProgress = (windowHeight - cardCenter) / windowHeight;
+        
+        if (scrollProgress > 0.2 && scrollProgress < 1) {
+          const scale = 0.8 + (scrollProgress - 0.2) * 0.5;
+          const opacity = Math.min(1, (scrollProgress - 0.2) * 2);
+          const translateY = (1 - scrollProgress) * 50;
+          
+          (card as HTMLElement).style.transform = `scale(${Math.min(scale, 1)}) translateY(${translateY}px)`;
+          (card as HTMLElement).style.opacity = `${opacity}`;
+          (card as HTMLElement).style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease';
+        } else if (scrollProgress >= 1) {
+          (card as HTMLElement).style.transform = 'scale(1) translateY(0)';
+          (card as HTMLElement).style.opacity = '1';
+        } else {
+          (card as HTMLElement).style.transform = 'scale(0.8) translateY(50px)';
+          (card as HTMLElement).style.opacity = '0';
         }
       });
     };
@@ -138,6 +204,7 @@ export function InteractiveBody() {
 
     // Initialize
     setTimeout(() => {
+      replaceContent();
       setupLogoCarousel();
       handleScroll();
     }, 500);
@@ -157,12 +224,12 @@ export function InteractiveBody() {
 
   return (
     <div className="relative min-h-screen">
-      {/* Background gradient animations */}
+      {/* Background gradient animations - PromoFlix colors */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
         <motion.div
           className="absolute w-96 h-96 rounded-full blur-3xl"
           style={{ 
-            background: 'radial-gradient(circle, rgba(58, 110, 242, 0.1) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 193, 7, 0.08) 0%, transparent 70%)',
             top: '20%',
             left: '10%'
           }}
@@ -179,7 +246,7 @@ export function InteractiveBody() {
         <motion.div
           className="absolute w-96 h-96 rounded-full blur-3xl"
           style={{ 
-            background: 'radial-gradient(circle, rgba(242, 61, 148, 0.1) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(74, 158, 255, 0.08) 0%, transparent 70%)',
             bottom: '20%',
             right: '10%'
           }}
@@ -207,7 +274,7 @@ export function InteractiveBody() {
         )}
       </AnimatePresence>
 
-      {/* Scroll to Top Button */}
+      {/* Scroll to Top Button - PromoFlix colors */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
@@ -215,7 +282,7 @@ export function InteractiveBody() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-[#3a6ef2] to-[#6927DA] text-white rounded-full shadow-2xl"
+            className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-[#FFC107] to-[#FFD54F] text-black rounded-full shadow-2xl"
             style={{ zIndex: 100 }}
             whileHover={{ scale: 1.1, rotate: 360 }}
             whileTap={{ scale: 0.9 }}
@@ -228,14 +295,14 @@ export function InteractiveBody() {
         )}
       </AnimatePresence>
 
-      {/* Custom Cursor */}
-      <div id="cursor-trail" className="custom-cursor" />
+      {/* Custom Cursor - PromoFlix color */}
+      <div id="cursor-trail" className="custom-cursor" style={{ borderColor: 'rgba(255, 193, 7, 0.5)' }} />
 
-      {/* Scroll Progress Bar */}
+      {/* Scroll Progress Bar - PromoFlix colors */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 origin-left"
         style={{
-          background: 'linear-gradient(to right, #3a6ef2, #6927DA, #F23D94)',
+          background: 'linear-gradient(to right, #FFC107, #FFD54F, #4A9EFF)',
           scaleX: useTransform(scrollY, [0, document.documentElement.scrollHeight - window.innerHeight], [0, 1]),
           zIndex: 9999
         }}
