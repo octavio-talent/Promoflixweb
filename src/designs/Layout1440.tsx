@@ -11,6 +11,7 @@ import imgTopContainer from "figma:asset/4082fab549dc89b83375e04762877da0d51b6d6
 import imgImgPlaceholder1 from "figma:asset/e280a99005b9bb91b1d04d38ce2c62feeae447bb.png";
 import imgImgPlaceholder2 from "figma:asset/c06da22c98853aa9dd4ede926c7f56cbf166968e.png";
 import { imgVector } from "./svg-3pr3x";
+import { IndustriesSection } from "../components/IndustriesSection";
 
 function Logo() {
   return (
@@ -195,11 +196,11 @@ function Container() {
     <div className="content-stretch flex gap-[48px] items-center max-w-[1240px] relative shrink-0 w-full" data-name="container">
       <Text />
       <div className="h-[498px] relative shrink-0 w-[610px]" data-name="img">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none bg-white">
           <video
             aria-label="Promoflix hero video"
             autoPlay
-            className="absolute h-full left-0 object-cover top-0 w-full"
+            className="absolute left-0 object-contain object-center top-[-4px] h-[calc(100%+8px)] w-full bg-white"
             loop
             muted
             playsInline
@@ -207,6 +208,8 @@ function Container() {
           >
             <source src="/hero-video.mp4" type="video/mp4" />
           </video>
+          <div aria-hidden="true" className="absolute bg-white bottom-0 left-0 top-0 w-[8px]" />
+          <div aria-hidden="true" className="absolute bg-white bottom-0 right-0 top-0 w-[8px]" />
         </div>
       </div>
     </div>
@@ -2440,11 +2443,7 @@ function Container3() {
 }
 
 function HowTeamsUsePromoflix() {
-  return (
-    <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip py-[120px] relative shrink-0 w-[1440px] z-[6]" data-name="How teams use promoflix">
-      <Container3 />
-    </div>
-  );
+  return <IndustriesSection />;
 }
 
 function Frame45() {

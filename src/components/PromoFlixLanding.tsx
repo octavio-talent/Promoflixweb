@@ -98,79 +98,6 @@ export function PromoFlixLanding() {
       }
     };
 
-    const setupIndustriesMarquee = () => {
-      const section = document.querySelector('[data-name="How teams use promoflix"]');
-      if (!(section instanceof HTMLElement)) {
-        return;
-      }
-
-      const container = section.querySelector('[data-name="container"]');
-      if (!(container instanceof HTMLElement)) {
-        return;
-      }
-
-      const track = Array.from(container.children).find((child, index) => {
-        return index === 1 && child instanceof HTMLElement;
-      });
-
-      if (!(track instanceof HTMLElement)) {
-        return;
-      }
-
-      const originalWidth = setupLoopingTrack(section, track, '[data-name="CARD (for now)"]', 'industries-marquee-track');
-      if (track.dataset.autoMarqueeReady === 'true' || originalWidth <= 0) {
-        return;
-      }
-
-      let rafId = 0;
-      let lastTimestamp = 0;
-      let offset = 0;
-      const pxPerSecond = 36;
-      const pauseUntil = { value: 0 };
-
-      const pause = () => {
-        pauseUntil.value = Date.now() + 2000;
-      };
-
-      const step = (timestamp: number) => {
-        if (!track.isConnected) {
-          return;
-        }
-
-        if (!lastTimestamp) {
-          lastTimestamp = timestamp;
-        }
-
-        if (!track.matches(':hover') && Date.now() > pauseUntil.value) {
-          const delta = timestamp - lastTimestamp;
-          offset -= (pxPerSecond * delta) / 1000;
-
-          if (Math.abs(offset) >= originalWidth) {
-            offset += originalWidth;
-          }
-
-          track.style.transform = `translate3d(${offset}px, 0, 0)`;
-        }
-
-        lastTimestamp = timestamp;
-        rafId = window.requestAnimationFrame(step);
-      };
-
-      track.dataset.autoMarqueeReady = 'true';
-      track.addEventListener('mouseenter', pause);
-      track.addEventListener('wheel', pause, { passive: true });
-      track.addEventListener('touchstart', pause, { passive: true });
-      rafId = window.requestAnimationFrame(step);
-
-      cleanupFns.push(() => {
-        window.cancelAnimationFrame(rafId);
-        track.style.transform = '';
-        track.removeEventListener('mouseenter', pause);
-        track.removeEventListener('wheel', pause);
-        track.removeEventListener('touchstart', pause);
-      });
-    };
-
     const setupTestimonialsScroller = () => {
       const section = document.querySelector('[data-name="Testimonials"]');
       if (!(section instanceof HTMLElement)) {
@@ -365,7 +292,6 @@ export function PromoFlixLanding() {
 
     const setupInteractivity = () => {
       applySectionIds();
-      setupIndustriesMarquee();
       setupTestimonialsScroller();
       setupPricingToggle();
 
