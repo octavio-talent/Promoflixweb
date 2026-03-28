@@ -100,7 +100,16 @@ export function IndustriesSection() {
               className={`industries-unified-card${transitioning ? ' is-transitioning' : ''}`}
             >
               <div className="industries-unified-media">
-                <img alt={item.label} className="industries-unified-image" src={item.image} />
+                <div className="industries-unified-stack" aria-hidden="true">
+                  <img alt="" className="industries-unified-image industries-unified-image-back" src={item.image} />
+                  <img alt="" className="industries-unified-image industries-unified-image-middle" src={item.image} />
+                </div>
+                <img alt={item.label} className="industries-unified-image industries-unified-image-front" src={item.image} />
+                <div className="industries-unified-play" aria-hidden="true">
+                  <svg className="industries-unified-play-icon" fill="none" viewBox="0 0 24 24">
+                    <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="currentColor" />
+                  </svg>
+                </div>
               </div>
               <div className="flex flex-col gap-2">
                 <p className="m-0 text-[14px] font-semibold uppercase leading-[1.5] text-[#2952e8]">{item.label}</p>

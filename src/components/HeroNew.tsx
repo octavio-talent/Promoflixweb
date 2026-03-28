@@ -59,11 +59,15 @@ export default function HeroNew({ onTryFreeClick, onSeeExampleClick }: HeroNewPr
         <div className="flex-1 w-full lg:max-w-[610px]">
           <div className="relative w-full">
             {/* Subtle background glow */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#f0f4ff] to-[#f8f9ff] rounded-2xl blur-2xl scale-105 opacity-60" />
+            <div className="absolute inset-[-12px] bg-gradient-to-br from-[#f0f4ff] to-[#f8f9ff] rounded-[32px] blur-2xl opacity-60" />
             <img
               src={imgProductScreenshot}
               alt="PromoFlix product interface"
-              className="relative w-full h-auto object-contain drop-shadow-xl"
+              className="relative block w-full h-auto rounded-2xl drop-shadow-xl"
+              style={{
+                WebkitMaskImage: "linear-gradient(to bottom, transparent 0, black 8px, black calc(100% - 8px), transparent 100%)",
+                maskImage: "linear-gradient(to bottom, transparent 0, black 8px, black calc(100% - 8px), transparent 100%)",
+              }}
             />
           </div>
         </div>

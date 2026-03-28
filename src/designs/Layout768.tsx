@@ -172,7 +172,7 @@ function Container() {
               <video
                 aria-label="Promoflix hero video"
                 autoPlay
-                className="absolute left-0 object-contain object-center top-[-4px] h-[calc(100%+8px)] w-full bg-white"
+                className="absolute inset-0 h-full w-full object-contain object-center bg-white"
                 loop
                 muted
                 playsInline
